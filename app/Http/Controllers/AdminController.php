@@ -7,6 +7,12 @@ use App\Models\Complaint;
 
 class AdminController extends Controller
 {
+
+    public function dashboard()
+    {
+        // Admin dashboard logic
+        return view('admin.dashboard');
+    }
     // Show all complaints to the admin
     public function index()
     {

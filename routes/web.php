@@ -24,19 +24,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Complaint routes (for users)
+    Route::get('/complaints', [ComplaintController::class, 'dahboard'])->name('complaints.dashboard');
     Route::get('/complaints', [ComplaintController::class, 'index'])->name('complaints.index');
     Route::get('/complaints/create', [ComplaintController::class, 'create'])->name('complaints.create');
     Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
 });
 
-// Admin-only routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/complaints', [AdminController::class, 'index'])->name('admin.complaints');
     Route::post('/complaints/{id}/status', [AdminController::class, 'updateStatus'])->name('admin.complaints.updateStatus');
-Route::get('/complaints/{id}', [ComplaintController::class, 'show'])->name('admin.complaints.show');
-   
+    Route::get('/complaints/{id}', [ComplaintController::class, 'show'])->name('admin.complaints.show');
 });
+
 
 
 require __DIR__.'/auth.php';
